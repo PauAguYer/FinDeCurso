@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cuenta Atrás - Fin del Segundo Trimestre</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            color: #fff;
+            background: linear-gradient(135deg, #1b1b1b, #3a3a3a);
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+            text-shadow: 0 0 20px #ff0057, 0 0 30px #ff006e;
+        }
+
+        .contador {
+            font-size: 5em;
+            font-weight: bold;
+            text-shadow: 0 0 15px #00ffd1, 0 0 25px #00fff3;
+            letter-spacing: 5px;
+            padding: 10px 20px;
+            border: 5px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        footer {
+            margin-top: 50px;
+            font-size: 1.2em;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        footer a {
+            color: #ff0057;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h1>Cuenta Regresiva: ¡Fin del Segundo Trimestre!</h1>
+    <div class="contador" id="contador">00:00:00:00</div>
+
+
+    <script>
+        // Fecha de fin del segundo trimestre ajustada al 7 de enero de 2025 a las 14:00
+        const finTrimestre = new Date('2025-03-07T14:00:00');
+
+        function actualizarContador() {
+            const ahora = new Date();
+            const diferencia = finTrimestre - ahora;
+
+            if (diferencia <= 0) {
+                document.getElementById('contador').textContent = "¡El trimestre ha terminado!";
+                clearInterval(intervalo);
+                return;
+            }
+
+            const dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
+            const horas = Math.floor((diferencia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutos = Math.floor((diferencia % (1000 * 60 * 60)) / (1000 * 60));
+            const segundos = Math.floor((diferencia % (1000 * 60)) / 1000);
+
+            document.getElementById('contador').textContent = 
+                `${dias.toString().padStart(2, '0')}:${horas.toString().padStart(2, '0')}:${minutos.toString().padStart(2, '0')}:${segundos.toString().padStart(2, '0')}`;
+        }
+
+        const intervalo = setInterval(actualizarContador, 1000);
+        actualizarContador();
+    </script>
+</body>
+</html>
